@@ -1,0 +1,97 @@
+<?php
+/**
+ * Virtual Pos Library
+ *
+ * Copyright (c) 2008-2009 Dahius Corporation (http://www.dahius.com)
+ * All rights reserved.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *  
+ * This software consists of voluntary contributions made by many individuals
+ * and is licensed under the LGPL.
+ */
+
+/**
+ * @package     VirtualPos
+ * @author      Hasan Ozgan <hasan@dahius.com>
+ * @copyright   2008-2009 Dahius Corporation (http://www.dahius.com)
+ * @license     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License
+ * @version     $Id: Response.php 4 2010-01-12 11:52:40Z HasanOzgan $
+ * @link        http://vpos4php.googlecode.com
+ * @since       0.1
+ */
+
+class VPosResponse
+{
+    /**
+     * var $_succeed is true => approved or false => declined
+     */
+    protected $_succeed;
+
+    /**
+     * var $_transactionId from bank
+     */
+    protected $_transactionId;
+
+    /**
+     * var $_createdBy from adapterName
+     */
+    protected $_createdBy;
+
+    /**
+     * var $_createdOn from bank unix timestamp
+     */
+    protected $_createdOn;
+
+    /**
+     * var $_provision pos auth code value
+     */
+    protected $_provision;
+
+    /**
+     * var $_code pos result code
+     */
+    protected $_code;
+
+    /**
+     * var $_message pos result message
+     */
+    protected $_message;
+
+    public function __construct()
+    {
+        $this->_succeed = false;
+        $this->_transactionId = "N/A";
+        $this->_createdOn = time();
+        $this->_createdBy = "N/A";
+        $this->_provision = "N/A";
+        $this->_code = "N/A";
+        $this->_message = "N/A";
+    }
+
+    public function __get($key)
+    {
+        $propertyName = "_$key";
+        if (!property_exists($this, $propertyName)) { throw new Dahius_VirtualPos_Exception("Property($key) not found"); }
+
+        return $this->{$propertyName};
+    }
+
+    public function __set($key, $value)
+    {
+        $propertyName = "_$key";
+        if (!property_exists($this, $propertyName)) { throw new Dahius_VirtualPos_Exception("Property($key) not found"); }
+
+        $this->{$propertyName} = $value;
+    }
+}

@@ -1,0 +1,15 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<div class="container-fluid">
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			<h3 class="page-title">
+				SanalPos Yönetimi<small>	Banka işlemleri ve Sanal Pos Yönetimi</small>
+			</h3>
+		</div>
+	</div>
+</div>
+
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.administrator')->with(get_defined_vars())->render(); ?>

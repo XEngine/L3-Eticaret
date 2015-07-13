@@ -1,0 +1,123 @@
+<div class="nav-container">
+<div class="nav-box">
+    <ul class="nav-ul unstyled">
+		<li><div class="nav-ul-title"><?php echo $var->getDescriptions->name; ?></div></li>
+		<?php $countRow = 0; ?>
+		<?php foreach($var->getChildren as $item): ?>
+		<?php if($countRow < 4): ?>
+		<li>
+			<a href="#" class="megamenu_drop"><?php echo $item->getDescriptions->name; ?></a>
+			<small>
+			<?php if($item->getChildren): ?>
+				<?php foreach($item->getChildren as $child): ?>
+					<?php echo $child->getDescriptions->name; ?> 
+				<?php endforeach; ?>
+			<?php endif; ?>
+			</small>
+			<?php if($item->getChildren): ?>
+			<div class="nav-dropdown">
+				<div class="nav-shadow"></div>
+				<div class="nav-dropdown-container">
+					<div class="nav-dropdown-left">
+						<div class="dummy-container">
+							<h4><?php echo $item->getDescriptions->name; ?></h4>
+							<dl>
+								<?php foreach($item->getChildren as $child): ?>
+									<dt><i class="fa fa-angle-right"></i><a href="<?php echo URL::Base(); ?>/category/<?php echo $child->getDescriptions->alias; ?>"> <?php echo $child->getDescriptions->name; ?></a></dt>
+									<dd>
+										<small><?php echo $child->getDescriptions->description; ?></small>
+											<?php if($child->getChildren): ?>
+											<div id="sub-category-enabler" onclick="subCategoryEnable(this)"><i class="fa fa-sort-down"></i> Alt kategoriler</div>
+											<div class="sub-categories">
+												<div class="page-header">
+													<h4><?php echo $child->getDescriptions->name; ?></h4><small><div id="sub-category-disabler" onclick="subCategoryDisable()"><i class="icon-mail-reply-all"></i> Üst Menü</div></small>
+												</div>
+												
+												<ul class="nav-subs clearfix">
+													<?php foreach($child->getChildren as $subchild): ?>
+													<li>
+														<a href="<?php echo URL::Base(); ?>/category/<?php echo $subchild->getDescriptions->alias; ?>"><?php echo $subchild->getDescriptions->name; ?></a>
+													</li>
+													<?php endforeach; ?>
+												</ul>
+											</div>
+											<?php endif; ?>
+									</dd>
+								<?php endforeach; ?>
+							</dl>
+						</div>
+					</div>
+					<div class="nav-dropdown-right">
+						<?php if($item->getDescriptions->advert_effect): ?>
+						<div class="menu_img_effect">
+						
+						</div>
+						<?php endif; ?>
+						<?php if($item->getDescriptions->advert_img): ?>
+							<?php if($item->getDescriptions->advert_url): ?><a href="<?php echo $item->getDescriptions->advert_url; ?>"><?php endif; ?>
+							<img alt="<?php echo $item->getDescriptions->name; ?>" src="http://www.beyazesyapazar.com/advert_beyaz.jpg" />
+							<?php if($item->getDescriptions->advert_url): ?></a><?php endif; ?>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+		<?php else: ?>
+		<li>
+			<a href="#" class="megamenu_drop"><i class="fa fa-plus-square"></i> Daha fazla sonuç...</a>
+			<small>Bu reyonda daha çok raf var!</small>
+			<div class="nav-dropdown">
+				<div class="nav-shadow"></div>
+				<div class="nav-dropdown-container">
+					<div class="nav-dropdown-left">
+						<div class="dummy-container">
+							<h4><?php echo $var->getDescriptions->name; ?></h4>
+							<dl>
+								<?php foreach($var->getChildren as $child): ?>
+									<dt><i class="fa fa-angle-right"></i><a href="<?php echo URL::Base(); ?>/category/<?php echo $child->getDescriptions->alias; ?>"> <?php echo $child->getDescriptions->name; ?></a></dt>
+									<dd>
+										<small><?php echo $child->getDescriptions->description; ?></small>
+											<?php if($child->getChildren): ?>
+											<div id="sub-category-enabler" onclick="subCategoryEnable(this)"><i class="fa fa-sort-down"></i> Alt kategoriler</div>
+											<div class="sub-categories">
+												<div class="page-header">
+													<h4><?php echo $child->getDescriptions->name; ?></h4><small><div id="sub-category-disabler" onclick="subCategoryDisable()"><i class="icon-mail-reply-all"></i> Üst Menü</div></small>
+												</div>
+												
+												<ul class="nav-subs clearfix">
+													<?php foreach($child->getChildren as $subchild): ?>
+													<li>
+														<a href="<?php echo URL::Base(); ?>/category/<?php echo $subchild->getDescriptions->alias; ?>"><?php echo $subchild->getDescriptions->name; ?></a>
+													</li>
+													<?php endforeach; ?>
+												</ul>
+											</div>
+											<?php endif; ?>
+									</dd>
+								<?php endforeach; ?>
+							</dl>
+						</div>
+					</div>
+					<div class="nav-dropdown-right">
+						<?php if($item->getDescriptions->advert_effect): ?>
+						<div class="menu_img_effect">
+						
+						</div>
+						<?php endif; ?>
+						<?php if($item->getDescriptions->advert_img): ?>
+							<?php if($item->getDescriptions->advert_url): ?><a href="<?php echo $item->getDescriptions->advert_url; ?>"><?php endif; ?>
+							<img alt="<?php echo $item->getDescriptions->name; ?>" src="http://www.beyazesyapazar.com/advert_beyaz.jpg" />
+							<?php if($item->getDescriptions->advert_url): ?></a><?php endif; ?>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</li>
+		<?php break; ?>
+		<?php endif; ?>
+		</li>
+		<?php $countRow++; ?>
+		<?php endforeach; ?>
+    </ul>
+</div>
+</div>

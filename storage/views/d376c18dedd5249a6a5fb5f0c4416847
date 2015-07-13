@@ -1,0 +1,5 @@
+
+<?php \Laravel\Section::start('content'); ?>
+a
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.administrator')->with(get_defined_vars())->render(); ?>

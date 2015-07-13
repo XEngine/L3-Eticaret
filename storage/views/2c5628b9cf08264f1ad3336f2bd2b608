@@ -1,0 +1,33 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<div class="container-fluid">
+    <div class="page-header">
+    <h1>Ödemeniz Tamamlandı <small></small></h1>
+    </div>
+	<div class="row-fluid">
+		<div class="span12">
+			    <div class="hero-unit">
+			  		<?php if($response->isSuccess()): ?>
+				  	    <h1>Ödeme Başarılı!</h1>
+				    	<p>Tebrikler, ödemenizi başarıyla tamamladınız!</p>
+				    <?php else: ?>
+				  	    <h1>Ödemenizde Sorun Var!</h1>
+				    	<p>Ödemenizle ilgili bir hata oluştu lütfen tekrar deneyiniz.</p>
+				    <?php endif; ?>
+				    <p>
+				    	<?php if($response->isSuccess()): ?>
+				    		<a href="https://www.beyazesyapazar.com" class="btn btn-success btn-large">
+				   				Siteye Geri Dön
+				   			</a>
+				   		<?php else: ?>
+				    		<a href="https://www.beyazesyapazar.com/bayi/payment/" class="btn btn-warning btn-large">
+				   				Ödeme Ekranına Dön
+				   			</a>
+				   		<?php endif; ?>
+				    </p>
+			    </div>
+		</div>
+	</div>
+</div>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.default')->with(get_defined_vars())->render(); ?>

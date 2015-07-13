@@ -1,0 +1,53 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<div class="row-fluid">
+	<div class="span3">
+        <?php echo render('category.main_page_list'); ?>
+    </div>
+    <div class="span9">
+		<div class="slider-box" style="width:700px;height:300px;">
+			<!--LayerSlider layer-->
+			<div class="ls-layer" style="transition3d: all; slidedelay: 6000">
+		 
+				<!--LayerSlider background-->
+				<img class="ls-bg" src="<?php echo URL::base(); ?>/img/slider/vantilator.jpg" alt="layer1-background">
+			
+			</div>
+			<div class="ls-layer" style="transition3d: all; slidedelay: 6000">
+		 
+				<!--LayerSlider background-->
+				<img class="ls-bg" src="<?php echo URL::base(); ?>/img/slider/belderia.jpg" alt="layer1-background">
+			
+			</div>
+			<div class="ls-layer" style="transition3d: all; slidedelay: 6000">
+		 
+				<!--LayerSlider background-->
+				<img class="ls-bg" src="<?php echo URL::base(); ?>/img/slider/lg.jpg" alt="layer1-background">
+			
+			</div>
+			<div class="ls-layer" style="transition3d: all; slidedelay: 6000">
+		 
+				<!--LayerSlider background-->
+				<img class="ls-bg" src="<?php echo URL::base(); ?>/img/slider/sebil.jpg" alt="layer1-background">
+			
+			</div>
+		</div>
+    </div>
+</div>
+<div class="row-fluid theBlock">
+	<div class="span12">
+		<?php echo render('blocks.triplebanner'); ?>
+	</div>
+</div>
+<div class="row-fluid theBlock">
+	<div class="span12">
+		<?php echo render('blocks.topselledproducts', array('var' => "all")); ?>
+	</div>
+</div>
+<div class="row-fluid theBlock">
+	<div class="span12">
+		<?php echo render('blocks.mostviewedproducts4sq', array('var' => "all")); ?>
+	</div>
+</div>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.default')->with(get_defined_vars())->render(); ?>

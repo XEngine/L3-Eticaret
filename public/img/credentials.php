@@ -1,0 +1,1 @@
+<?php define('AUTH_KEY', '0248fff6bedae065d639786a6ddc25bb6401c932'); ?>

@@ -1,0 +1,57 @@
+bonus:
+    adapter: VPosAdapterCC5
+    parameters:
+        host:
+            bank: https://ccpos.garanti.com.tr/servlet/cc5ApiServer
+            authentication: https://ccpos.garanti.com.tr/servlet/gar3Dgate
+            callback: https://google.com/callback/for/3DSecure
+        username: garanti_user
+        password: garanti_pass
+        store_type: 3d
+        working_mode: P
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1, 2, 3, 4]
+paraf:
+    adapter: VPosAdapterCC5
+    parameters:
+        host:
+            bank: https://sanalpos.halkbank.com.tr/servlet/cc5ApiServer
+            authentication: https://sanalpos.halkbank.com.tr/servlet/est3Dgate
+            callback: https://www.beyazesyapazar.com/checkout/payment
+        username: bulentadmin
+        password: KUTU4117
+        store_type: 3d
+        working_mode: P
+        client_id: 500004117
+        store_key: KUTU4117
+        valid_md_status: [1, 2, 3, 4]
+bankasya:
+    adapter: VPosAdapterPosNet
+    parameters:
+        host:
+            bank: http://sanalpos.innova.com.tr/IposNet/sposnet.aspx
+            authenticate: http://sanalpos.innova.com.tr/iPayAPM/MPI_Enrollment.asp
+            callback: https://www.beyazesyapazar.com/checkout/payment/3DCallBack
+        username: ykb_user
+        password: ykb_pass
+        tid: 12345678
+        mid: 1234567890
+        posnet_id: 987
+        merchant_key: 310,28,192,97,13,90,45,167
+        valid_md_status: [1, 2, 3, 4]
+
+worldcard:
+    adapter: VPosAdapterPosNet
+    parameters:
+        host:
+            bank: https://www.posnet.ykb.com/PosnetWebService/XML
+            authenticate: https://www.posnet.ykb.com/3DSWebService/YKBPaymentService
+            callback: https://example.com/callback/for/3DSecure
+        username: ykb_user
+        password: ykb_pass
+        tid: 12345678
+        mid: 1234567890
+        posnet_id: 987
+        merchant_key: 310,28,192,97,13,90,45,167
+        valid_md_status: [1, 2, 3, 4]

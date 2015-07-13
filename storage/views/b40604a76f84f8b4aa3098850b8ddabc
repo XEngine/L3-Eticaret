@@ -1,0 +1,68 @@
+<div class="nav-container">
+<div class="nav-box">
+    <ul class="nav-ul unstyled">
+		<?php foreach ($cat as $item): ?>
+		<li>
+
+				<a href="<?php echo URL::Base(); ?>/category/<?php echo $item->getDescriptions->alias; ?>" class="megamenu_drop"><?php echo $item->getDescriptions->name; ?></a>
+				
+			<small>
+			<?php if($item->getChildren): ?>
+				<?php foreach($item->getChildren as $child): ?>
+					<?php echo $child->getDescriptions->name; ?> 
+				<?php endforeach; ?>
+			<?php endif; ?>
+			</small>
+			<?php if($item->getChildren): ?>
+			<div class="nav-dropdown">
+				<div class="nav-shadow"></div>
+				<div class="nav-dropdown-container">
+					<div class="nav-dropdown-left">
+						<div class="dummy-container">
+							<h4><?php echo $item->getDescriptions->name; ?></h4>
+							<dl>
+								<?php foreach($item->getChildren as $child): ?>
+									<dt><i class="fa fa-angle-right"></i><a href="<?php echo URL::Base(); ?>/category/<?php echo $child->getDescriptions->alias; ?>"> <?php echo $child->getDescriptions->name; ?></a></dt>
+									<dd>
+										<small><?php echo $child->getDescriptions->description; ?></small>
+											<?php if($child->getChildren): ?>
+											<div onclick="subCategoryEnable(this)"><i class="fa fa-sort-down"></i> Alt kategoriler</div>
+											<div class="sub-categories">
+												<div class="page-header">
+													<h4><?php echo $child->getDescriptions->name; ?></h4><div onclick="subCategoryDisable()"><i class="icon-mail-reply-all"></i><small> Üst Menü</small></div>
+												</div>
+												
+												<ul class="nav-subs clearfix">
+													<?php foreach($child->getChildren as $subchild): ?>
+													<li>
+														<a href="<?php echo URL::Base(); ?>/category/<?php echo $subchild->getDescriptions->alias; ?>"><?php echo $subchild->getDescriptions->name; ?></a>
+													</li>
+													<?php endforeach; ?>
+												</ul>
+											</div>
+											<?php endif; ?>
+									</dd>
+								<?php endforeach; ?>
+							</dl>
+						</div>
+					</div>
+					<div class="nav-dropdown-right">
+						<?php if($item->getDescriptions->advert_effect): ?>
+						<div class="menu_img_effect">
+						
+						</div>
+						<?php endif; ?>
+						<?php if($item->getDescriptions->advert_img): ?>
+							<?php if($item->getDescriptions->advert_url): ?><a href="<?php echo $item->getDescriptions->advert_url; ?>"><?php endif; ?>
+							<img alt="<?php echo $item->getDescriptions->name; ?>" src="<?php echo URL::base(); ?>/img/advert_beyaz.png" />
+							<?php if($item->getDescriptions->advert_url): ?></a><?php endif; ?>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+		</li>
+		<?php endforeach; ?>
+    </ul>
+</div>
+</div>

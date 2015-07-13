@@ -1,0 +1,112 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<div class="container">
+    <div class="page-header">
+    <h1>Alışverişi Tamamla <small>Adres Seçimi</small></h1>
+    </div>
+    <div class="row-fluid">
+    	<div class="span12">
+		    <div class="progress progress-success progress-striped">
+		    	<div class="bar" style="width: 66.6%;"></div>
+		    </div>
+    	</div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Teslimat Adresi</th>
+                        <th>Fatura Adresi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="span6">
+                            <div>
+                                <select class="span12" id="delivery">
+                                    <option></option>
+                                <?php foreach($addresses as $address): ?>
+                                    <option data-type="delivery" value="<?php echo $address->id; ?>"><?php echo $address->address_title; ?></option>
+                                <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div id="delivery-info" class="alert alert-info">
+                                <?php if($defdelivery != null): ?>
+                                <strong>Seçili olan adresiniz:</strong><br>
+                                <?php echo $defdelivery->address; ?>
+                                <p><?php echo $defdelivery->getTown->name; ?> / <?php echo $defdelivery->getCity->name; ?></p>
+                                <p><small><b>FATURA TİPİ : </b><?php echo $defdelivery->bill_type; ?></small>
+                                | <small><b>TC KİMLİK NO : </b><?php echo $defdelivery->citizen_number; ?></p>
+                                <?php else: ?>
+                                <strong>Dikkat!</strong> Lütfen bir adres seçiniz!
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                        <td class="span6">
+                            <div>
+                                <select class="span12" id="billing">
+                                    <option></option>
+                                <?php foreach($addresses as $address): ?>
+                                    <option value="<?php echo $address->id; ?>"><?php echo $address->address_title; ?></option>
+                                <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div id="billing-info" class="alert alert-info">
+                                <?php if($defbilling != null): ?>
+                                <strong>Seçili olan adresiniz:</strong><br>
+                                <?php echo $defbilling->address; ?>
+                                <p><?php echo $defbilling->getTown->name; ?> / <?php echo $defbilling->getCity->name; ?></p>
+                                <p><small><b>FATURA TİPİ : </b><?php echo $defbilling->bill_type; ?></small>
+                                | <small><b>TC KİMLİK NO : </b><?php echo $defbilling->citizen_number; ?></p>
+                                <?php else: ?>
+                                <strong>Dikkat!</strong> Lütfen bir adres seçiniz!
+                                <?php endif; ?>                            
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="pull-left">
+                                <a class="btn btn-mini btn-danger">Yeni Adres Ekle</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="/checkout/payment" class="btn btn-success">Adresi Onayla</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#delivery").select2({
+        placeholder : "Lütfen Adres Seçiniz"
+    });
+    $("#billing").select2({
+        placeholder : "Lütfen Adres Seçiniz"
+    });
+});
+function setAddr(e){
+    $.ajax({
+        type: "POST",
+        url: "/checkout/setAddress",
+        datatype: "JSON",
+        data: 'type=' + e.target.id + '&addrID=' + e.val,
+        success: function(data) {
+            var $html =  '<strong>Seçili olan adresiniz:</strong><br>'+data.address;
+                $html += '<p>'+data.getTown.name+' / '+data.getCity.name+'</p>'
+                $html += '<p><small><b>FATURA TİPİ : </b>'+data.bill_type+'</small>';
+                $html += ' | <small><b>TC KİMLİK NO : </b>'+data.citizen_number+'</p>';
+            var $container = $('#'+e.target.id+'-info');
+            $container.html($html);
+        },
+    });
+}
+$("#delivery").on("change", setAddr);
+$("#billing").on("change", setAddr);
+</script>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.default')->with(get_defined_vars())->render(); ?>

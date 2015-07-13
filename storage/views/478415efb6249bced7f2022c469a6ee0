@@ -1,0 +1,218 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<?php if($result->top != 1): ?>
+<div class="row-fluid" id='categoryPage'>
+	<div class="row-fluid">
+		<div class="span12">
+			<div id="breadcrumb">
+			<ul class="breadcrumb" style="margin-bottom: 5px;">
+			<li>
+				<a href="<?php echo URL::base(); ?>">Ana Sayfa</a>
+				<span class="divider">/</span>
+			</li>
+		    <li class="dropdown">
+			    <ul id="branches-dropdown" role="menu" class="dropdown-menu">
+			    	<?php foreach($result->getChildren as $item): ?>
+			        <li><a href="<?php echo URL::base(); ?>/category/<?php echo $item->getDescriptions->alias; ?>"><i class="fa fa-circle"></i> <?php echo $item->getDescriptions->name; ?> <code><?php echo count($item->getProducts); ?></code></a></li>
+			        <?php endforeach; ?>
+			    </ul>
+		   		<span class="divider">/</span>
+		    </li>
+			<li class="active"><?php echo $result->getDescriptions->name; ?></li>
+			</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="menu clearfix">
+				<div class="arrow_box"></div>
+				<div class="menu_box"><p class="menu_box_par">Sonuçları Filtrele</p></div>
+			</div>
+			<div class="filter">
+                <?php if($filters != null) { ?>
+                <div class="box">
+                    <ul class="nav nav-list">
+                        <li class="nav-header" style="color:#b80000">Seçilen Filtreleriniz</li>
+                        <div class="filter-max-height">
+                            <?php foreach($filters as $k => $v): ?>
+                                <li><a class="attribute-link" data-attr-class="<?php echo $k; ?>" data-value="<?php echo $v['val']; ?>" href="">
+                                            <img src="<?php echo URL::base(); ?>/img/icons/cancel.png">
+                                            <b style="color:#b80000"><?php echo $k; ?> : </b>
+                                            <i><?php echo $v['val']; ?></i>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </div>
+                    </ul>
+                </div>
+                <?php } ?>
+				<div class="box">
+					<ul class="nav nav-list">
+						<li class="nav-header">Fiyat Aralığı</li>
+						<div class="filter-max-height">
+						<?php if(!empty($selected_ranges)){
+							$checked = "checked=''";
+							$style = "style=\"color:#b80000\"";
+						}else{
+							$checked = '';
+							$style= '';
+						}
+						?> 
+						<?php foreach($ranges as $range) { ?>
+							<?php if(isset($range['values'])): ?>
+							<li>
+								<label class="checkbox">
+									<input type="checkbox" class="attribute-checkbox" <?php echo $checked; ?> data-type="1" data-attr-class="Price Range" data-value="<?php echo $range['str']; ?>"><span <?php echo $style; ?>><?php echo $range['str']; ?> (<?php echo $range['count']; ?>)</span>
+								</label>
+							</li>
+							<?php endif; ?>
+						<?php } ?>
+						</div>
+					</ul>
+				</div>
+				<?php foreach($result->getAttributeListing as $item): ?>
+					<div class="box">
+						<ul class="nav nav-list">
+							<?php
+								if($filters != null && array_key_exists($item->name,$filters)){
+									$navStyle = "style=\"color:#b80000\"";
+								}else{ $navStyle = ""; }
+							?>
+							<li <?php echo $navStyle; ?> class="nav-header"><?php echo $item->name; ?></li>
+							<div class="filter-max-height">
+							<?php foreach($item->getAttributes as $attributeItem) { ?>
+								<?php
+									if(isset($filters[$item->name]) && $attributeItem->id == $filters[$item->name]['id']){
+										$lblStyle = "style=\"color:#b80000\"";
+										$check = "checked=\"checked\"";
+									}else{ $lblStyle = ""; $check=""; }
+								?>
+								<?php if(array_key_exists($attributeItem->id,$attribute_filter)): ?>
+								<li>
+									<label class="checkbox">
+										<input type="checkbox" <?php echo $check; ?> class="attribute-checkbox" data-type="0" data-attr-class="<?php echo $item->name; ?>" data-value="<?php echo $attributeItem->value; ?>"><span <?php echo $lblStyle; ?> ><?php echo $attributeItem->value; ?> (<?php echo $attribute_filter[$attributeItem->id]; ?>)</span>
+									</label>
+								</li>
+								<?php endif; ?>
+							<?php } ?>
+							</div>
+						</ul>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<div class="span9">
+			<div class="navbar navbar-googlenav">
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li><a href="#"><i class="icon-th"></i></a></li>
+						<li><a href="#"><i class="icon-th-list"></i></a></li>
+					</ul>
+					
+					<ul class="nav">
+						<li><a href="#">Çok Satılana Göre</a></li>
+						<li><a href="#">Puanına Göre</a></li>
+						<li><a href="#">Fiyatına Göre</a></li>
+					</ul>
+				</div>
+			</div>
+	        <div id="productList">
+	            <?php echo render('category.product_list', array('result' => $products,'filters'=>$filters)); ?>
+	        </div>
+		</div>
+	</div>
+</div>
+<?php else: ?>
+<div id="breadcrumb">
+	<ul class="breadcrumb" style="margin-bottom: 5px;">
+	<li>
+		<a href="<?php echo URL::base(); ?>">Ana Sayfa</a>
+		<span class="divider">/</span>
+	</li>
+	<li class="active">
+		<?php echo $result->getDescriptions->name; ?>
+		<span class="divider">/</span>
+	</li>
+    <li class="dropdown">
+	    <a class="dropdown-toggle" id="branches" role="button" data-toggle="dropdown" href="#">Alt Kategoriler <b class="caret"></b></a>
+	    <ul id="branches-dropdown" role="menu" class="dropdown-menu">
+	    	<?php foreach($result->getChildren as $item): ?>
+	        <li><a href="<?php echo URL::base(); ?>/category/<?php echo $item->getDescriptions->alias; ?>"><small><i class="fa fa-minus"></i> <?php echo $item->getDescriptions->name; ?></small> <code><?php echo count($item->getProducts); ?></code></a></li>
+	        <?php endforeach; ?>
+	    </ul>
+    </li>
+	</ul>
+</div>
+
+<div class="row-fluid" id="CategoryMenu">
+	<div class="categoryMenu span12">
+		<div class="categoryMenuContainer clearfix">
+			<?php foreach($cat as $item): ?>
+				<div class="categoryTab <?php echo ($result->id == $item->id) ?  "active" : ''; ?>">
+					<p>
+						<span class="icon"><img width="16" height="16" src="<?php echo $item->getDescriptions->icon; ?>"/></span>
+						<span class="title"><?php echo $item->getDescriptions->name; ?></span>
+					</p>
+					<?php if($item->getChildren): ?>
+						<div class="categoryMenuDropDown">
+							<?php foreach($item->getChildren as $child): ?>
+								<dt><i class="fa fa-angle-right"></i><a href="<?php echo URL::Base(); ?>/category/<?php echo $child->getDescriptions->alias; ?>"> <?php echo $child->getDescriptions->name; ?></a></dt>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</div>
+<div class="row-fluid" id="NewsAndSlider">
+	<div class="span3">
+	<?php echo render('category.list_by_category', array('var' => $result)); ?>
+	</div>
+	<div class="span9">
+	<?php if(!empty($result->getSlideshow)): ?>
+			<?php foreach($result->getSlideshow as $item): ?>
+				<?php if($item->main == 1): ?>
+				<ul id="slider">
+					<?php foreach($item->getItems as $child): ?>
+						<?php if(!empty($child->item_url)): ?>
+							<li><a href="<?php echo $child->item_url; ?>"><img src="<?php echo $child->item_img; ?>" alt="" /></a></li>
+						<?php else: ?>
+							<li><img src="<?php echo $child->item_img; ?>" alt="" /></li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+				<?php endif; ?>
+			<?php endforeach; ?>
+	<?php endif; ?>
+	</div>
+</div>
+<div class="row-fluid theBlock">
+	<div class="span12">
+		<?php echo render('blocks.topselledproducts', array('var' => $result->id)); ?>
+	</div>
+</div>
+<div class="row-fluid theBlock mostViewedProducts">
+	<div class="span8">
+		<?php echo render('blocks.mostviewedproducts', array('var' => $result->id)); ?>
+	</div>
+	<div class="span4">
+		<img src="/img/slider/leaderboard1.jpg" />
+	</div>
+</div>
+<script>
+$(document).ready(function() {
+	$('#slider').rhinoslider({
+		controlsMousewheel: false,
+		controlsKeyboard: false,
+		controlsPrevNext: true,
+		controlsPlayPause: false,
+		showBullets: 'always',
+		showControls: 'always'
+	});
+});
+</script>
+<?php endif; ?>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('layouts.default')->with(get_defined_vars())->render(); ?>
