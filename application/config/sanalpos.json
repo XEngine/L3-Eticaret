@@ -39,16 +39,16 @@
     },
     "ingbank": {
         "adapter": "Est",
-        "api_url": "https://sanalpos.halkbank.com.tr/servlet/cc5ApiServer",
-        "client_id": "500004117",
-        "username": "bulentadmin",
-        "password": "KUTU4117",
+        "api_url": "",
+        "client_id": "",
+        "username": "",
+        "password": "",
         "mode": "P",
         "testcard": {
-            "number": "5406675406675403",
-            "cvv": "000",
-            "expire_month": "12",
-            "expire_year": "2015"
+            "number": "",
+            "cvv": "",
+            "expire_month": "",
+            "expire_year": ""
         },
         "currencyCodes": {
             "TRY": 949,
@@ -58,16 +58,16 @@
     },
     "garantibank": {
         "adapter": "Gvp",
-        "api_url": "https://sanalposprovtest.garanti.com.tr/VPServlet",
-        "terminal_id": "30691242",
-        "merchant_id": "7000679",
-        "auth_username": "PROVAUT",
-        "auth_password": "123qweASD",
-        "refund_username": "PROVRFN",
-        "refund_password": "123qweASD",
+        "api_url": "",
+        "terminal_id": "",
+        "merchant_id": "",
+        "auth_username": "",
+        "auth_password": "",
+        "refund_username": "",
+        "refund_password": "",
         "mode": "TEST",
         "testcard": {
-            "number": "4059175701021869",
+            "number": "",
             "cvv": "000",
             "expire_month": "01",
             "expire_year": "2020"
