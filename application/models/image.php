@@ -1,7 +1,8 @@
 <?php
 
-class Image extends Eloquent {
+class Image extends Eloquent
+{
 
-public static $table = 'product_images';
+    public static $table = 'product_images';
 
 }

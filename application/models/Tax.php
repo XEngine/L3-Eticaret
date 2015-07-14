@@ -1,5 +1,6 @@
 <?php
 
-class Tax extends Eloquent {
-	
+class Tax extends Eloquent
+{
+
 }

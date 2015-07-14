@@ -1,5 +1,6 @@
 <?php
 
-class Cart extends Eloquent {
+class Cart extends Eloquent
+{
 
 }
