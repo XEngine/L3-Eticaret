@@ -1,5 +1,6 @@
 <?php
 
-class Brand extends Eloquent {
-	
+class Brand extends Eloquent
+{
+
 }

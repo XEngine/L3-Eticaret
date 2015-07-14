@@ -1,5 +1,6 @@
 <?php
 
-class Bank extends Eloquent {
+class Bank extends Eloquent
+{
 
 }

@@ -35,19 +35,19 @@
 
 return array(
 
-	'docs' => array('handles' => 'docs'),
-    'sentry' => array(
-    	'location' => 'sentry',
-   		'auto' => true,
+    'docs'     => array('handles' => 'docs'),
+    'sentry'   => array(
+        'location' => 'sentry',
+        'auto'     => true,
     ),
-	'messages' => array(
-		'auto' => true
-	),
-	'cartify' => array(
+    'messages' => array(
+        'auto' => true
+    ),
+    'cartify'  => array(
         'handles' => 'cartify',
         'auto'    => true
     ),
-	'hashids' => array('auto' => true),
-    'resizer' => array( 'auto' => true),
-    'locate' => array('auto' => true),
+    'hashids'  => array('auto' => true),
+    'resizer'  => array('auto' => true),
+    'locate'   => array('auto' => true),
 );

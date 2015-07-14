@@ -1,5 +1,6 @@
 <?php
 
-class Currency extends Eloquent {
-	
+class Currency extends Eloquent
+{
+
 }
